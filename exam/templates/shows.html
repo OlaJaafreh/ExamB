@@ -30,7 +30,7 @@
             <td>{{show.network}}</td>
             <td>{{show.releaseDate}}</td>
             {%if user == show.user%}
-            <td><a href="{% url 'delete' show.id%}">Delete</a> | <a href="{% url 'editShow' show.id%}">Edit</a></td>
+            <td><a href="{% url 'delete' show.id%}">Delete</a> | <a href="{% url 'editShow' show.id%}">Edit</a> | <a href="{% url 'details' show.id%}">Details</a></td>
             {%else%}
             <td><a href="{% url 'details' show.id%}">Details</a></td>
             {%endif%}

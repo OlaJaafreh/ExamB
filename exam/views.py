@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect
-from .models import Users , ReShows
+from .models import Users , ReShows ,CommendsUser
 import bcrypt
 from django.contrib import messages
 
@@ -74,7 +74,21 @@ def addShow(request):
 def details(request,Sid):
     user = Users.objects.get(id = request.session['userid'])
     show = ReShows.objects.get(id = Sid)
-    return render(request,'details.html',{'user':user,'show':show})
+    com = CommendsUser.objects.all()
+    return render(request,'details.html',{'user':user,'show':show,'coms':com})
+
+def addCom(request,Sid):
+    user = Users.objects.get(id = request.session['userid'])
+    show = ReShows.objects.get(id = Sid)
+    com = request.POST['PostcomName']
+    CommendsUser.objects.create(user = user , reshow = show,text=com)
+    return redirect('details',Sid)
+
+def delCom(request,Cid,Sid):
+    com = CommendsUser.objects.get(id = Cid)
+    com.delete()
+    return redirect('details',Sid)
+
 
 def edit(request,Sid):
     user = Users.objects.get(id = request.session['userid'])

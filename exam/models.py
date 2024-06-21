@@ -66,6 +66,14 @@ class ReShows(models.Model):
     user = models.ForeignKey(Users,related_name='user',on_delete=models.CASCADE)
     objects = ReShowsManager()
 
+class CommendsUser(models.Model):
+    text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(Users,related_name='userCom',on_delete=models.CASCADE)
+    reshow = models.ForeignKey(ReShows,related_name='commentts',on_delete=models.CASCADE)
+    
+
 
 
 

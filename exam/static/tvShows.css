@@ -89,6 +89,32 @@ margin-right: 300px;
     padding-bottom: 20px;
   }
 
+  .blabkReq{
+    border: solid black;
+    width: 500px;
+    margin: 20px;
+    padding: 30px;
+    /* background-color: red; */
+  }
+
+  .commm{
+    padding-bottom: 10px;
+  }
+
+  .dellll{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .delbttnn{
+    text-decoration: none;
+    background-color: #767978;
+    padding: 10px;
+    color: #f2f2f2;
+  }
+
+
 
 
 

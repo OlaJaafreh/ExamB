@@ -28,5 +28,33 @@
 
     <p>{{show.comments}}</p>
 </div>
+<div class="blabkReq">
+<form action="{% url 'addCom' show.id%}" method="POST">
+    {% csrf_token %}
+    {%if user != show.user%}
+<label for="">Post a comment</label>
+<input type="text" name="PostcomName">
+<button>Post</button>
+{%endif%}
+
+
+    {%for comment in show.commentts.all%}
+    <div class="commm">
+    {%if user == comment.user%}
+        <h3>{{comment.user.first_name}} at {{comment.created}}</h3>
+        <div class="dellll">
+        <h3>{{comment.text}}</h3> 
+        <a class="delbttnn" href="{%url 'delCom' comment.id show.id%}">Delete</a>
+    </div>
+        {%else%}
+        <h3>{{comment.user.first_name}} at {{comment.created}}</h3>
+        <h3>{{comment.text}}</h3>
+        {%endif%}
+    </div>
+    {%endfor%}
+
+
+</form>
+</div>
 </body>
 </html>
