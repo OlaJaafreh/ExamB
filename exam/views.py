@@ -95,3 +95,7 @@ def editShow(request,Sid):
     else:
         return redirect('edit',Sid)
     
+def delete(request,Sid):
+    show = ReShows.objects.get(id = Sid)
+    show.delete()
+    return redirect('TVshows')

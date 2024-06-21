@@ -11,4 +11,5 @@ urlpatterns = [
     path('shows/<int:Sid>', views.details,name='details'), 
     path('shows/edit/<int:Sid>', views.edit,name='edit'),
     path('shows/editShow/<int:Sid>', views.editShow,name='editShow'),
+    path('shows/delete/<int:Sid>', views.delete,name='delete'),
 ]
