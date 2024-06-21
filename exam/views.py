@@ -52,11 +52,18 @@ def newShow(request):
     return render(request,'newShow.html',{'user':user})
 
 def addShow(request):
+    showsb = ReShows.objects.all
     errors = ReShows.objects.basic_validator(request.POST, is_edit=False)
     if len(errors) > 0:
         return render(request,'newShow.html', {'errors': errors})
     else:
-        title = request.POST['title']
+        
+        if ReShows.objects.filter(title=request.POST['title']).exists():
+            messages.error(request, 'Title must be unique.')
+            return render(request,'newShow.html')
+        else:
+            title = request.POST['title']
+
         network = request.POST['network']
         releaseDate = request.POST['releaseDate']
         comments = request.POST['comments']
@@ -76,12 +83,20 @@ def edit(request,Sid):
 
 def editShow(request,Sid):
     show = ReShows.objects.get(id = Sid)
+    user = Users.objects.get(id = request.session['userid'])
     if request.method == "POST":
         errors = ReShows.objects.basic_validator(request.POST, is_edit=True)
         if len(errors) > 0:
             return render(request,'editShow.html', {'errors': errors,'show':show})
         else:
-            title = request.POST['Etitle']
+
+            if ReShows.objects.filter(title=request.POST['Etitle']).exists():
+                messages.error(request, 'Title must be unique.')
+                return render(request,'editShow.html',{'user':user,'show':show})
+            else:
+                title = request.POST['Etitle']
+        
+            # title = request.POST['Etitle']
             network = request.POST['Enetwork']
             releaseDate = request.POST['EreleaseDate']
             comments = request.POST['Ecomments']
