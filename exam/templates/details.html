@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Shows</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tvShows.css' %}">
 </head>
 <body>
-    <a href="{% url 'TVshows'%}">TV Shows</a>
-    <a href="{% url 'logout'%}">Logout</a>
+
+
+    <div class="header">
+        <a class="shh" href="{% url 'TVshows'%}">TV Shows</a>
+        <a href="{% url 'logout'%}">Logout</a>
+    </div>
+
+    <div class="contt">
 
     <h1>{{show.title}}</h1>
-    <h3>Recommended By: {{show.user.first_name}}</h3>
+    <h3 class="Reomm"><strong>Recommended By:</strong> {{show.user.first_name}}</h3>
 
     <h3> <strong>Network:</strong> {{show.network}}</h3>
 
@@ -19,5 +27,6 @@
     <h3><strong>{{show.user.first_name}} Comments</strong></h3>
 
     <p>{{show.comments}}</p>
+</div>
 </body>
 </html>

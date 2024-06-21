@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Shows</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tvShows.css' %}">
 </head>
 <body>
-    <h1>Edit Show</h1>
+ 
 
-    <a href="{% url 'TVshows'%}">TV Shows</a>
-    <a href="{% url 'logout'%}">Logout</a>
+    <div class="header">
+        <h1 class="rec">Edit Show</h1>
+        <a class="sh" href="{% url 'TVshows'%}">TV Shows</a>
+        <a href="{% url 'logout'%}">Logout</a>
+    </div>
 
     <form action="{%url 'editShow' show.id%}" method="POST">
         {% csrf_token %}
-    <table>
+    <table id="newTable">
         <tr>
             <td>Title</td>
             <td><input type="text" name="Etitle" id="" value="{{show.title}}" required></td>
@@ -51,7 +56,7 @@
 
     </table>
 
-    <button>Update</button>
+    <button class="addBtn">Update</button>
 </form>
 </body>
 </html>

@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Shows</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tvShows.css' %}">
 </head>
 <body>
     <h1>welcome to you netfix, {{user.first_name}}</h1>
 
-    <a href="{% url 'newShow'%}">+ Create</a>
+    <div class="CrLo">
+    <a class="cre" href="{% url 'newShow'%}">+ Create</a>
     <a href="{% url 'logout'%}">Logout</a>
+</div>
 
     <h2>All TV Shows:</h2>
-     <table>
+     <table  id="customers">
         <tr>
             <th>Title</th>
             <th>Network</th>
@@ -22,13 +26,13 @@
 
         {%for show in shows%}
         <tr>
-            <th>{{show.title}}</th>
-            <th>{{show.network}}</th>
-            <th>{{show.releaseDate}}</th>
+            <td>{{show.title}}</td>
+            <td>{{show.network}}</td>
+            <td>{{show.releaseDate}}</td>
             {%if user == show.user%}
-            <th><a href="{% url 'delete' show.id%}">Delete</a> | <a href="{% url 'editShow' show.id%}">Edit</a></th>
+            <td><a href="{% url 'delete' show.id%}">Delete</a> | <a href="{% url 'editShow' show.id%}">Edit</a></td>
             {%else%}
-            <th><a href="{% url 'details' show.id%}">Details</a></th>
+            <td><a href="{% url 'details' show.id%}">Details</a></td>
             {%endif%}
         </tr>
         {%endfor%}
