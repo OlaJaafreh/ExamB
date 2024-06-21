@@ -1,0 +1,36 @@
+16.171.135.66
+
+deployment
+
+    1  sudo apt-get update
+    2  sudo apt-get install nginx -y
+    3  git clone https://github.com/OlaJaafreh/ExamB.git
+    4  sudo apt-get install python3-venv -y
+    5  ll
+    6  cd ExamB/
+    7  python3 -m venv venv
+    8  source venv/bin/activate
+    9  pip install django==2.2.4
+   10  pip install bcrypt
+   11  pip install gunicorn
+   12  pip install setuptools
+   13  ll
+   14  cd ExamB/
+   15  sudo vim settings.py
+   16  cd ..
+   17  python manage.py collectstatic
+   18  python manage.py makemigrations
+   19  python manage.py migrate
+   20  gunicorn ExamB.wsgi
+   21  deactivate
+   22  sudo vim /etc/systemd/system/gunicorn.service
+   23  sudo systemctl daemon-reload
+   24  sudo systemctl restart gunicorn
+   25  sudo systemctl status gunicorn
+   26  sudo vim /etc/nginx/sites-available/ExamB
+   27  sudo ln -s /etc/nginx/sites-available/ExamB /etc/nginx/sites-enabled
+   28  sudo rm /etc/nginx/sites-enabled/default
+   29  sudo nginx -t
+   30  sudo vim /etc/nginx/nginx.conf
+   31  sudo service nginx restart
+   32  history
