@@ -27,6 +27,24 @@ class UsersManager(models.Manager):
 
         return errors
     
+class ReShowsManager(models.Manager):
+    def basic_validator(self, postData,is_edit=False):
+        errors = {}
+
+        if not is_edit:
+            if len(postData['title']) <= 3:
+                errors["title"] = "Title should be at least 3 characters"
+                
+            if len(postData['comments']) <= 3:
+                errors["comments"] = "Comment should be at least 3 characters"
+        else:
+            if len(postData['Etitle']) <= 3:
+                errors["Etitle"] = "Title should be at least 3 characters"
+                
+            if len(postData['Ecomments']) <= 3:
+                errors["Ecomments"] = "Comment should be at least 3 characters"
+
+        return errors
 
 class Users(models.Model):
     first_name = models.CharField(max_length=45)
@@ -36,6 +54,17 @@ class Users(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     objects = UsersManager()
+
+
+class ReShows(models.Model):
+    title = models.CharField(max_length=255)
+    network = models.CharField(max_length=255)
+    releaseDate = models.DateField()
+    comments = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(Users,related_name='user',on_delete=models.CASCADE)
+    objects = ReShowsManager()
 
 
 

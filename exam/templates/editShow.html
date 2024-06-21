@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows</title>
+</head>
+<body>
+    <h1>Edit Show</h1>
+
+    <a href="{% url 'TVshows'%}">TV Shows</a>
+    <a href="{% url 'logout'%}">Logout</a>
+
+    <form action="{%url 'editShow' show.id%}" method="POST">
+        {% csrf_token %}
+    <table>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" name="Etitle" id="" value="{{show.title}}" required></td>
+        </tr>
+        {% if errors.title %}
+            <tr>
+                <td></td>
+                <td><span class="error">{{ errors.title }}</span></td>
+            </tr>
+        {% endif %}
+
+        <tr>
+            <td>Network</td>
+            <td><input type="text" name="Enetwork" id="" value="{{show.network}}" required></td>
+        </tr>
+        
+
+        <tr>
+            <td>Release Date</td>
+            <td><input type="date" name="EreleaseDate" id="" value="{{show.releaseDate}}" required></td>
+        </tr>
+        
+
+        <tr>
+            <td>Comments</td>
+            <td><textarea name="Ecomments" id="" required>{{show.comments}}</textarea></td>
+        </tr>
+
+        {% if errors.comments %}
+            <tr>
+                <td></td>
+                <td><span class="error">{{ errors.comments }}</span></td>
+            </tr>
+        {% endif %}
+
+    </table>
+
+    <button>Update</button>
+</form>
+</body>
+</html>

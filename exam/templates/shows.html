@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows</title>
+</head>
+<body>
+    <h1>welcome to you netfix, {{user.first_name}}</h1>
+
+    <a href="{% url 'newShow'%}">+ Create</a>
+    <a href="{% url 'logout'%}">Logout</a>
+
+    <h2>All TV Shows:</h2>
+     <table>
+        <tr>
+            <th>Title</th>
+            <th>Network</th>
+            <th>Release Date</th>
+            <th>More</th>
+        </tr>
+
+        {%for show in shows%}
+        <tr>
+            <th>{{show.title}}</th>
+            <th>{{show.network}}</th>
+            <th>{{show.releaseDate}}</th>
+            {%if user == show.user%}
+            <th><a href="">Delete</a> | <a href="{% url 'editShow' show.id%}">Edit</a></th>
+            {%else%}
+            <th><a href="{% url 'details' show.id%}">Details</a></th>
+            {%endif%}
+        </tr>
+        {%endfor%}
+
+     </table>
+</body>
+</html>

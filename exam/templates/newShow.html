@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows</title>
+</head>
+<body>
+    <h1>Recommend a New Show</h1>
+
+    <a href="{% url 'TVshows'%}">TV Shows</a>
+    <a href="{% url 'logout'%}">Logout</a>
+
+    <form action="{%url 'addShow'%}" method="POST">
+        {% csrf_token %}
+    <table>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" name="title" id="" required></td>
+        </tr>
+        {% if errors.title %}
+            <tr>
+                <td></td>
+                <td><span class="error">{{ errors.title }}</span></td>
+            </tr>
+        {% endif %}
+
+        <tr>
+            <td>Network</td>
+            <td><input type="text" name="network" id="" required></td>
+        </tr>
+        
+
+        <tr>
+            <td>Release Date</td>
+            <td><input type="date" name="releaseDate" id="" required></td>
+        </tr>
+        
+
+        <tr>
+            <td>Comments</td>
+            <td><textarea name="comments" id="" required></textarea></td>
+        </tr>
+
+        {% if errors.comments %}
+            <tr>
+                <td></td>
+                <td><span class="error">{{ errors.comments }}</span></td>
+            </tr>
+        {% endif %}
+
+    </table>
+
+    <button>Add</button>
+</form>
+</body>
+</html>
